@@ -1,0 +1,23 @@
+name: inspection
+root: ./
+startup_window: roscore
+pre_window: export UAV_NAMESPACE=red
+windows:
+  - roscore:
+      layout: tiled
+      panes:
+        - roscore
+        - waitForRos; roslaunch px4_gazebo px4_sitl.launch
+        - waitForRos; rosparam set use_sim_time true; roslaunch px4_gazebo mavros.launch 
+  - gazebo:
+      layout: tiled
+      panes:
+        - waitForRos; roslaunch px4_gazebo kopterworx.launch
+  - arm&takeof:
+      layout: tiled
+      panes:
+        - waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot.launch manual_takeoff:=false
+  - trajectory:
+      layout: tiled
+      panes:
+        - waitForRos; waitForOdometry; roslaunch uav_ros_tracker topp_tracker.launch tracker_config:=./custom_config/topp_config_custom.yaml
