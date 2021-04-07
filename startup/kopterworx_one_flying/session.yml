@@ -16,7 +16,7 @@ windows:
   - arm&takeof:
       layout: tiled
       panes:
-        - source ~/new_ws/devel/setup.zsh; waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot.launch manual_takeoff:=true
+        - source ~/new_ws/devel/setup.zsh; waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot.launch manual_takeoff:=true control_type:=pid_cascade_node_px4
   - trajectory:
       layout: tiled
       panes:
