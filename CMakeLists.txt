@@ -121,7 +121,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_subdirectory(ROMFS/px4fmu_common/mixers)
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/px4_gazebo.cpp
