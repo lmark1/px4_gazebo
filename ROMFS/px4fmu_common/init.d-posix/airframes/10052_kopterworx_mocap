@@ -42,16 +42,18 @@ param set MC_ROLLRATE_P	0.12
 
 # mocap parameters 
 
-# Enable EKF2 Vision Position and Yaw fusion
+# Enable EKF2 Vision Position and Yaw fusion 
+# vision_pose/pose
 param set EKF2_AID_MASK 24
 
 # Set primary altitude estimator to vision
-param set EKF2_HGT_MODE 0
+param set EKF2_HGT_MODE 2
 
 # Disable GPS checks
 param set EKF2_GPS_CHECK 0
 
 # No magnetometer fusion
 param set EKF2_MAG_TYPE 5
+
 param set MAV_ODOM_LP 0
 param set MAV_USEHILGPS 0
