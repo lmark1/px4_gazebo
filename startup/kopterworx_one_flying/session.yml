@@ -1,4 +1,4 @@
-name: fake_mocap
+name: inspection
 root: ./
 startup_window: roscore
 pre_window: export UAV_NAMESPACE=red
@@ -7,25 +7,17 @@ windows:
       layout: tiled
       panes:
         - roscore
-        - waitForRos; roslaunch px4_gazebo px4_sitl.launch vehicle:=kopterworx_mocap
-        - waitForRos; rosparam set use_sim_time true; roslaunch px4_gazebo mavros.launch config_yaml:=custom_config/px4_config.yaml
+        - waitForRos; roslaunch px4_gazebo px4_sitl.launch
+        - waitForRos; rosparam set use_sim_time true; roslaunch px4_gazebo mavros.launch 
   - gazebo:
       layout: tiled
       panes:
-        - waitForRos; roslaunch px4_gazebo kopterworx.launch Y:=1.57
-  - control:
+        - waitForRos; roslaunch px4_gazebo kopterworx.launch
+  - arm&takeof:
       layout: tiled
       panes:
-        - source ~/new_ws/devel/setup.zsh; waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot.launch manual_takeoff:=true control_type:=pid_cascade_node_px4_yawrate odometry:=mavros/local_position/odom
-        - "#rostopic pub --once /$UAV_NAMESPACE/joy sensor_msgs/Joy \"buttons: [0,0,0,0,0,1]\""
+        - waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot.launch manual_takeoff:=false
   - trajectory:
       layout: tiled
       panes:
         - waitForRos; waitForOdometry; roslaunch uav_ros_tracker topp_tracker.launch tracker_config:=./custom_config/topp_config_custom.yaml
-        - "#rostopic pub /$UAV_NAMESPACE/tracker/input_pose"
-  - mocap:
-      layout: tiled
-      panes:
-        - source ~/new_ws/devel/setup.zsh; waitForRos; waitForSimulation; 
-          roslaunch erl_drone vision_pose_publisher.launch 
-          pose:=/kopterworx/pose config_file:=custom_config/vision_pose_config.yaml
