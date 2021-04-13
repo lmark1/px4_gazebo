@@ -16,7 +16,10 @@ windows:
   - control:
       layout: tiled
       panes:
-        - source ~/new_ws/devel/setup.zsh; waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot.launch manual_takeoff:=true control_type:=pid_cascade_node_px4_yawrate odometry:=mavros/local_position/odom
+        - waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot.launch 
+          manual_takeoff:=true control_type:=pid_cascade_node_px4_yawrate 
+          odometry:=mavros/local_position/odom local_callback_enable:=true
+          default_params:=custom_config/position_control_mocap.yaml
         - "#rostopic pub --once /$UAV_NAMESPACE/joy sensor_msgs/Joy \"buttons: [0,0,0,0,0,1]\""
   - trajectory:
       layout: tiled
