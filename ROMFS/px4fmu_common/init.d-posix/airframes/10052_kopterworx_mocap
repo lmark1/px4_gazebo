@@ -47,7 +47,7 @@ param set MC_ROLLRATE_P	0.12
 param set EKF2_AID_MASK 24
 
 # Set primary altitude estimator to vision
-param set EKF2_HGT_MODE 2
+param set EKF2_HGT_MODE 3
 
 # Disable GPS checks
 param set EKF2_GPS_CHECK 0
