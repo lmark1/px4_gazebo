@@ -26,6 +26,7 @@ windows:
   - mocap:
       layout: tiled
       panes:
-        - source ~/new_ws/devel/setup.zsh; waitForRos; waitForSimulation; 
-          roslaunch erl_drone vision_pose_publisher.launch 
-          pose:=/kopterworx/pose config_file:=custom_config/vision_pose_config.yaml
+        - waitForRos; waitForSimulation; 
+          roslaunch uav_ros_general vision_pose_publisher.launch 
+          pose:=/kopterworx/pose pose_out:=mavros/vision_pose/pose
+          config_file:=custom_config/vision_pose_config.yaml
