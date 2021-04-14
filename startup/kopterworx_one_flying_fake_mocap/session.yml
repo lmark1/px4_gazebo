@@ -16,9 +16,8 @@ windows:
   - control:
       layout: tiled
       panes:
-        - waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot.launch 
-          manual_takeoff:=true control_type:=pid_cascade_node_px4_yawrate 
-          odometry:=mavros/local_position/odom local_callback_enable:=true
+        - waitForRos; waitForOdometry; roslaunch uav_ros_control pid_carrot_optitrack.launch 
+          control_type:=pid_cascade_node_px4_yawrate 
           default_params:=custom_config/position_control_mocap.yaml
         - "#rostopic pub --once /$UAV_NAMESPACE/joy sensor_msgs/Joy \"buttons: [0,0,0,0,0,1]\""
   - trajectory:
@@ -31,5 +30,5 @@ windows:
       panes:
         - waitForRos; waitForSimulation; 
           roslaunch uav_ros_general vision_pose_publisher.launch 
-          pose:=/kopterworx/pose pose_out:=mavros/vision_pose/pose
+          odometry:=/kopterworx/odometry odometry_out:=mavros/odometry/out
           config_file:=custom_config/vision_pose_config.yaml
